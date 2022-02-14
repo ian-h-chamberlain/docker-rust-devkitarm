@@ -7,6 +7,11 @@ extended = true
 build-stage = 1
 test-stage = 1
 doc-stage = 1
+dist-stage = 1
+install-stage = 1
+
+# Limited set of tools for now to speed up the build.
+tools = ["cargo", "clippy", "rustfmt", "src"] 
 
 [llvm]
 download-ci-llvm = "if-available"
