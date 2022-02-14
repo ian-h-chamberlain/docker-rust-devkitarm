@@ -1,19 +1,16 @@
 FROM buildpack-deps:buster as builder
 
 WORKDIR /usr/src
-RUN git clone --depth=1 https://github.com/Meziu/rust-horizon.git
+RUN git clone --shallow-since=2021-12-01 https://github.com/Meziu/rust-horizon.git && \
+    git submodule update --init
 
 # Install some additional tools required for building Rust.
 RUN apt-get update -y && apt-get install -y \
     cmake ninja-build
 
 WORKDIR /usr/src/rust-horizon
-# Separate step to create a docker commit for submodule updates and building boostrap
-RUN ./x.py -v || true
-RUN ./x.py -v setup user
-# --stage 0 just makes the build faster, really we should probably use --stage=2
-RUN ./x.py -v dist --stage=1 \
-    rustc rust-std rust-src cargo clippy rustfmt
+COPY config.toml /usr/src/rust-horizon/
+RUN ./x.py -v dist
 
 FROM devkitpro/devkitarm
 
