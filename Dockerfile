@@ -12,7 +12,7 @@ WORKDIR /usr/src/rust-horizon
 RUN ./x.py -v || true
 RUN ./x.py -v setup user
 # --stage 0 just makes the build faster, really we should probably use --stage=2
-RUN ./x.py -v dist --stage=0 \
+RUN ./x.py -v dist --stage=1 \
     rustc rust-std rust-src cargo clippy rustfmt
 
 FROM devkitpro/devkitarm
