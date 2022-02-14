@@ -5,9 +5,8 @@ RUN apt-get update -y && apt-get install -y \
     cmake ninja-build
 
 WORKDIR /usr/src
-RUN git clone --shallow-since=2021-12-01 https://github.com/Meziu/rust-horizon.git && \
-    cd rust-horizon && \
-    git submodule update --init
+# Commit date is old enough to get the LLVM artifacts downloaded from upstream CI
+RUN git clone --shallow-since=2021-12-01 https://github.com/Meziu/rust-horizon.git
 
 WORKDIR /usr/src/rust-horizon
 COPY config.toml /usr/src/rust-horizon/
