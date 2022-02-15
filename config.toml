@@ -1,5 +1,6 @@
 # Defaults in https://github.com/rust-lang/rust/blob/master/src/bootstrap/defaults/config.user.toml
 profile = "user"
+changelog-seen = 2
 
 [build]
 # Use a stage 1 build to make it faster. Stage 2 would be better eventually
@@ -13,7 +14,15 @@ install-stage = 1
 docs = false
 
 # Limited set of tools for now to speed up the build.
-tools = ["cargo", "clippy", "rustfmt", "src"] 
+tools = [
+    "cargo",
+    "clippy",
+    "rustfmt",
+    "src",
+]
 
 [llvm]
-download-ci-llvm = "if-available"
+download-ci-llvm = true
+# seems related to https://github.com/rust-lang/rust/issues/69857
+# CI doesn't build in-tree libunwind, maybe?
+llvm-libunwind = 'system'
