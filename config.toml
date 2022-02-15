@@ -1,8 +1,7 @@
-# Adapted from https://github.com/rust-lang/rust/blob/master/src/bootstrap/defaults/config.user.toml
+# Defaults in https://github.com/rust-lang/rust/blob/master/src/bootstrap/defaults/config.user.toml
+profile = "user"
 
 [build]
-extended = true
-
 # Use a stage 1 build to make it faster. Stage 2 would be better eventually
 build-stage = 1
 test-stage = 1
