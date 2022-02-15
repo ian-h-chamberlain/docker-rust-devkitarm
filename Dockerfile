@@ -10,7 +10,8 @@ RUN git clone --shallow-since=2021-12-01 https://github.com/Meziu/rust-horizon.g
 
 WORKDIR /usr/src/rust-horizon
 COPY config.toml /usr/src/rust-horizon/
-RUN RUST_BACKTRACE=1 ./x.py dist
+RUN ./x.py build
+RUN ./x.py dist
 
 FROM devkitpro/devkitarm
 
