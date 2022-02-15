@@ -22,9 +22,4 @@ tools = [
 ]
 
 [llvm]
-# Ugh, maybe we have to build until https://github.com/rust-lang/rust/issues/69857
-download-ci-llvm = false
-
-[dist]
-# We're not building everything, so of course we won't dist everything
-missing-tools = false
+download-ci-llvm = true
