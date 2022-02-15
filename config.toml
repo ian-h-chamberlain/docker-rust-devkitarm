@@ -9,6 +9,9 @@ doc-stage = 1
 dist-stage = 1
 install-stage = 1
 
+# Something seems broken in docs build
+docs = false
+
 # Limited set of tools for now to speed up the build.
 tools = ["cargo", "clippy", "rustfmt", "src"] 
 
