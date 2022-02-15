@@ -23,6 +23,8 @@ tools = [
 
 [llvm]
 download-ci-llvm = true
+
+[rust]
 # seems related to https://github.com/rust-lang/rust/issues/69857
 # CI doesn't build in-tree libunwind, maybe?
 llvm-libunwind = 'system'
