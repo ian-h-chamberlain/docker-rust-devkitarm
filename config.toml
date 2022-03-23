@@ -21,5 +21,9 @@ tools = [
     "src",
 ]
 
+[install]
+prefix = "/usr/src/dist"
+sysconfdir = "etc"
+
 [llvm]
 download-ci-llvm = true
