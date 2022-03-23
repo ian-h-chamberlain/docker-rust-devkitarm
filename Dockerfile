@@ -4,10 +4,10 @@ FROM buildpack-deps:buster as builder
 RUN apt-get update -y && apt-get install -y \
     cmake ninja-build
 
-ARG FORK=Meziu/rust-horizon
-ARG BRANCH=horizon-std
+ARG FORK=AzureMarker/rust-horizon
+ARG BRANCH=feature/horizon-std
 # Commit old enough to see upstream rust-lang/rust
-ARG SHALLOW_SINCE="2022-02-01"
+ARG SHALLOW_SINCE="2022-03-01"
 
 WORKDIR /usr/src
 RUN git clone --shallow-since=${SHALLOW_SINCE} --recurse-submodules --shallow-submodules \
