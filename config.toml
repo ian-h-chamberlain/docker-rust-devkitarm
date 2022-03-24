@@ -3,7 +3,7 @@ profile = "user"
 changelog-seen = 2
 
 [build]
-target = ["armv6k-nintendo-3ds"]
+target = ["host", "armv6k-nintendo-3ds"]
 
 # Use a stage 1 build to make it faster. Stage 2 would be better eventually
 build-stage = 1
