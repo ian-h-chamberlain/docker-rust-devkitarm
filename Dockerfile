@@ -10,7 +10,7 @@ ARG BRANCH=feature/horizon-std
 # Commit old enough to see upstream rust-lang/rust
 ARG SHALLOW_SINCE="2022-03-01"
 
-WORKDIR /usr/src
+WORKDIR /tmp/rust-src
 # Clone as little as possible. The rust repo (and LLVM submodule) are *big*.
 RUN git clone \
     --shallow-since=${SHALLOW_SINCE} --recurse-submodules --shallow-submodules \
@@ -21,8 +21,9 @@ RUN git clone \
 ENV CFLAGS_armv6k_nintendo_3ds="-mfloat-abi=hard -mtune=mpcore -mtp=soft -march=armv6k"
 
 COPY config.toml .
-RUN python3 x.py build
-RUN python3 x.py install
+RUN --mount=type=cache,target=/tmp/rust-src/build,sharing=locked \
+    python3 x.py build && \
+    python3 x.py install
 
 # Main image, so we don't need to bring along the rustbuild repo + extra artifacts
 FROM devkitpro/devkitarm

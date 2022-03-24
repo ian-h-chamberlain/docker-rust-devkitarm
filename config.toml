@@ -3,7 +3,11 @@ profile = "user"
 changelog-seen = 2
 
 [build]
-target = ["host", "armv6k-nintendo-3ds"]
+target = [
+    # Need the host arch, since we're bootstrapping
+    "x86_64-unknown-linux-gnu",
+    "armv6k-nintendo-3ds",
+]
 
 # Use a stage 1 build to make it faster. Stage 2 would be better eventually
 build-stage = 1
