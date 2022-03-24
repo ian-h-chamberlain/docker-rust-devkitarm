@@ -3,6 +3,8 @@ profile = "user"
 changelog-seen = 2
 
 [build]
+target = ["armv6k-nintendo-3ds"]
+
 # Use a stage 1 build to make it faster. Stage 2 would be better eventually
 build-stage = 1
 test-stage = 1
@@ -21,9 +23,12 @@ tools = [
     "src",
 ]
 
-[install]
-prefix = "/usr/src/dist"
-sysconfdir = "etc"
+[target.armv6k-nintendo-3ds]
+cc = "/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc"
+cxx = "/opt/devkitpro/devkitARM/bin/arm-none-eabi-g++"
+ar = "/opt/devkitpro/devkitARM/bin/arm-none-eabi-ar"
+ranlib = "/opt/devkitpro/devkitARM/bin/arm-none-eabi-ranlib"
+linker = "/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc"
 
 [llvm]
 download-ci-llvm = true

@@ -1,8 +1,8 @@
-FROM buildpack-deps:buster as builder
+FROM devkitpro/devkitarm as builder
 
 # Install some additional tools required for building Rust.
 RUN apt-get update -y && apt-get install -y \
-    cmake ninja-build
+    cmake gcc g++ ninja-build
 
 ARG FORK=AzureMarker/rust-horizon
 ARG BRANCH=feature/horizon-std
@@ -22,6 +22,8 @@ RUN ./x.py install
 
 FROM devkitpro/devkitarm
 
-COPY --from=builder /usr/src/dist /tmp/dist
+COPY --from=builder /usr/local /usr/local
+
+ENV CFLAGS_armv6k_nintendo_3ds="-mfloat-abi=hard -mtune=mpcore -mtp=soft -march=armv6k"
 
 CMD [ "rustc", "--version" ]
