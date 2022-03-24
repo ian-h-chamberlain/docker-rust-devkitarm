@@ -14,16 +14,15 @@ RUN git clone --shallow-since=${SHALLOW_SINCE} --recurse-submodules --shallow-su
         --branch ${BRANCH} \
         https://github.com/${FORK}.git
 
+ENV CFLAGS_armv6k_nintendo_3ds="-mfloat-abi=hard -mtune=mpcore -mtp=soft -march=armv6k"
 WORKDIR /usr/src/rust-horizon
 
 COPY config.toml .
-RUN ./x.py build
-RUN ./x.py install
+RUN python3 x.py build
+RUN python3 x.py install
 
 FROM devkitpro/devkitarm
 
 COPY --from=builder /usr/local /usr/local
-
-ENV CFLAGS_armv6k_nintendo_3ds="-mfloat-abi=hard -mtune=mpcore -mtp=soft -march=armv6k"
 
 CMD [ "rustc", "--version" ]
