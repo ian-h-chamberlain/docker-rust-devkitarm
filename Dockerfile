@@ -2,7 +2,7 @@ FROM devkitpro/devkitarm as builder
 
 # Install some additional tools required for building Rust.
 RUN apt-get update -y && apt-get install -y \
-    cmake gcc g++ ninja-build
+    cmake gcc g++ libssl-dev ninja-build
 
 ARG FORK=AzureMarker/rust-horizon
 ARG BRANCH=feature/horizon-std
