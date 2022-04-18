@@ -6,7 +6,7 @@ RUN apt-get update -y && apt-get install -y \
     cmake gcc g++ libssl-dev ninja-build
 
 ARG FORK=AzureMarker/rust-horizon
-ARG BRANCH=feature/horizon-std
+ARG BRANCH=feature/horizon-threads
 # Commit old enough to see upstream rust-lang/rust
 ARG SHALLOW_SINCE="2022-03-01"
 
