@@ -9,13 +9,6 @@ target = [
     "armv6k-nintendo-3ds",
 ]
 
-# Use a stage 1 build to make it faster. Stage 2 would be better eventually
-build-stage = 1
-test-stage = 1
-doc-stage = 1
-dist-stage = 1
-install-stage = 1
-
 # Limited set of tools for now to speed up the build.
 tools = [
     "cargo",
@@ -24,9 +17,7 @@ tools = [
     "src",
 ]
 
-# Disable docs for https://github.com/rust-lang/rust/issues/80096
-# Might be able to remove once we're using stage2
-docs = false
+docs = true
 
 [target.armv6k-nintendo-3ds]
 cc = "/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc"
