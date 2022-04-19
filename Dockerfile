@@ -34,6 +34,9 @@ FROM devkitpro/devkitarm
 COPY --from=builder /usr/local /usr/local
 COPY --from=builder /root/.cargo /root/.cargo
 
+# We don't need everything, but gcc is still required for compiler_builtins
+RUN apt-get update -y && apt-get install -y gcc
+
 ENV PATH=/root/.cargo/bin:${DEVKITARM}/bin:${PATH}
 
 CMD [ "rustc", "--version" ]
