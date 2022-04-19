@@ -33,10 +33,13 @@ FROM devkitpro/devkitarm
 
 COPY --from=builder /usr/local /usr/local
 COPY --from=builder /root/.cargo /root/.cargo
+COPY --from=builder /etc/bash_completion.d/cargo /etc/bash_completion.d/cargo
 
 # We don't need everything, but gcc is still required for compiler_builtins
-RUN apt-get update -y && apt-get install -y gcc
-
+# and bash-completion is just nice to have 
+RUN apt-get update -y && apt-get install -y \
+    gcc bash-completion
+    
 ENV PATH=/root/.cargo/bin:${DEVKITARM}/bin:${PATH}
 
 CMD [ "rustc", "--version" ]
