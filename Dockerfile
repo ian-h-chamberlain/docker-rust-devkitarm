@@ -25,9 +25,15 @@ RUN --mount=type=cache,target=/tmp/rust-src/build,sharing=locked \
     python3 x.py build && \
     python3 x.py install
 
+# Use latest cargo-3ds from git
+RUN cargo install --git https://github.com/Meziu/cargo-3ds.git
+
 # Main image, so we don't need to bring along the rustbuild repo + extra artifacts
 FROM devkitpro/devkitarm
 
 COPY --from=builder /usr/local /usr/local
+COPY --from=builder /root/.cargo /root/.cargo
+
+ENV PATH=/root/.cargo/bin:${DEVKITARM}/bin:${PATH}
 
 CMD [ "rustc", "--version" ]
