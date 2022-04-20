@@ -35,6 +35,8 @@ COPY --from=builder /usr/local /usr/local
 COPY --from=builder /root/.cargo /root/.cargo
 COPY --from=builder /etc/bash_completion.d/cargo /etc/bash_completion.d/cargo
 
+RUN echo "[ -f /etc/bash_completion ] && . /etc/bash_completion" >> /root/.bashrc
+
 # We don't need everything, but gcc is still required for compiler_builtins
 # and bash-completion is just nice to have 
 RUN apt-get update -y && apt-get install -y \
